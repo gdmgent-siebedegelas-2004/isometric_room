@@ -132,15 +132,13 @@ gltfLoader.load(
 
 
 
-
-
 /**
  * POI
  */
 
 const points = [
     {
-        position: new THREE.Vector3(2, 2, 2),
+        position: new THREE.Vector3(-2, 1.9, 4.5),
         element: document.querySelector('.point-0')
     },
     {
@@ -148,7 +146,7 @@ const points = [
         element: document.querySelector('.point-1')
     },
     {
-        position: new THREE.Vector3(3, 2, -1.3), 
+        position: new THREE.Vector3(3, 2, -1.35), 
         element: document.querySelector('.point-2')
     }
 ]
@@ -194,16 +192,30 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 4
-camera.position.y = 5
-camera.position.z = 4
+camera.position.x = 7
+camera.position.y = 4
+camera.position.z = 8
 scene.add(camera)
-
-
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+
+// Limits for the rotation
+controls.minPolarAngle = Math.PI / 4; 
+controls.maxPolarAngle = Math.PI / 2; 
+
+// Allow more rotation to the right and less to the left
+controls.minAzimuthAngle = -Math.PI / 8; 
+controls.maxAzimuthAngle = Math.PI / 2;  
+
+// Limits for zooming
+controls.minDistance = 7;  
+controls.maxDistance = 14; 
+
+controls.enablePan = false;
+
+
 
 /**
  * Renderer
